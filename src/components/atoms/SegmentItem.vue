@@ -11,8 +11,8 @@ const props = defineProps<Props>();
 
 <template>
     <li class="segment" :class="`segment--${props.segmentColor}`">
-        <h2 class="segment__">On {{ props.segment.date }}</h2>
-        <p>{{ props.segment.quantity }} units left in stock</p>
+        <h2 class="segment__heading">On {{ props.segment.date }}</h2>
+        <p class="segment__body">{{ props.segment.quantity }} units left in stock</p>
     </li>
 </template>
 

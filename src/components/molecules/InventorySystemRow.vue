@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ISegment } from '@/scripts/interfaces';
-import { onUpdated } from 'vue';
+import { onBeforeMount } from 'vue';
 import Segment from '../atoms/SegmentItem.vue';
 
 interface Props {
@@ -9,7 +9,6 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-
 const segmentColors = ["primary", "secondary", "tertiary", "quartinary", "senary"];
 let renderedSegmentColors: string[] = [];
 let colorIndex = 0;
@@ -25,17 +24,19 @@ const getRenderedSegmentColors = () => {
 })
 }
 
-onUpdated(() => {
-    if (props.orderedProducts != null) {
-        props.segments[0].quantity = props.segments[0].quantity - props.orderedProducts;
-    }
+onBeforeMount(() => {
+    getRenderedSegmentColors();
 })
-
-getRenderedSegmentColors();
 </script>
 
 <template>
     <ul class="segmentsList">
-        <Segment v-for="(segment, index) in props.segments" :segment="segment" :segmentColor="`${renderedSegmentColors[index]}`" :key="index" />
+        <Segment
+            v-for="(segment, index) in props.segments"
+            v-show="segment.quantity > 0"
+            :segment="segment"
+            :segmentColor="`${renderedSegmentColors[index]}`"
+            :key="index"
+        />
     </ul>
 </template>
