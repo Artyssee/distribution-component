@@ -1,6 +1,11 @@
 # distribution-component
 Distribution component system technical test
 
+## How to run
+1. Run npm install
+2. Run npm run build
+3. Run npm run preview
+
 <!-- Vite setup explanation -->
 # Vue 3 + TypeScript + Vite
 
